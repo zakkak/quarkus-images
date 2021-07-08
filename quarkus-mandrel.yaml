@@ -15,6 +15,10 @@ labels:
 - name: "maintainer"
   value: "Quarkus Team <quarkus-dev@googlegroups.com>"
 
+# Open port 8000 to allow for debugging using --debug-attach
+ports:
+  - value: 8000
+
 packages:
   manager: microdnf
 
