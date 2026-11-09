@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": ["custom.regex"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^jdock/src/main/java/io/quarkus/images/modules/MavenModule\\.java$/"],
+      "matchStrings": ["private static final String VERSION = \"(?<currentValue>[^\"]+)\";"],
+      "datasourceTemplate": "maven",
+      "depNameTemplate": "org.apache.maven:apache-maven",
+      "versioningTemplate": "maven"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": ["maven"],
+      "matchPackageNames": ["org.apache.maven:apache-maven"],
+      "allowedVersions": "/^3\\.9\\.\\d+$/",
+      "prBodyNotes": [
+        "Update the SHA constant in `jdock/src/main/java/io/quarkus/images/modules/MavenModule.java` to the SHA-256 of `https://archive.apache.org/dist/maven/maven-3/{{{newVersion}}}/binaries/apache-maven-{{{newVersion}}}-bin.tar.gz` before merging. Verify the download against Apache's published `.sha512` checksum first; the Maven datasource cannot update this distribution checksum automatically."
+      ]
+    }
+  ]
+}
